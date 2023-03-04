@@ -3,6 +3,8 @@ name: Build project
 on:
   push:
     branches: [ master, feature, feature-a, feature-a1 ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
