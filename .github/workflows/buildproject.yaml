@@ -2,9 +2,7 @@ name: Build project
 
 on:
   push:
-    branches: [ master, feature-a, feature-b ]
-  pull_request:
-    braches: [ feature ]
+    branches: [ master, feature, feature-a, feature-a1 ]
 
 jobs:
   build:
