@@ -1,0 +1,30 @@
+name: Build project
+
+on:
+  push:
+    branches: [ master, feature-a, feature-b ]
+  pull_request:
+    braches: [ feature ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+    - name: Before checking caching 
+      run: ls -la
+
+    - name: Setup Node.js 16
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'npm'
+
+    - name: Install deps
+      run: npm install
+    
+    - name: Build project
+      run: npm run build
