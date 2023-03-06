@@ -21,6 +21,9 @@ jobs:
       with:
         path: ./node_modules
         key: ${{ runner.os }}-${{ hashFiles('./package-lock.json') }}
+        
+    - name: List files again
+      run: ls -la
 
     - if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
       name: Install deps
