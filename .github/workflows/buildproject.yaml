@@ -12,17 +12,24 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     
-    - name: Before checking caching 
+    - name: List files
       run: ls -la
+      
+    - name: Cache node modules
+      id: cache-node-modules
+      uses: actions/cache@v3
+      with:
+        path: ./node_modules
+        key: ${{ runner.os }}-${{ hashFiles('./package-lock.json') }}
+
+    - if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }}
+      name: Install deps
+      run: npm install
 
     - name: Setup Node.js 16
       uses: actions/setup-node@v3
       with:
         node-version: 16
-        cache: 'npm'
-
-    - name: Install deps
-      run: npm install
     
     - name: Build project
       run: npm run build
